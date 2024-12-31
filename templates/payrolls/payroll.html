@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Payroll Information</h2>
+  <p>Bank Account Number:  <span class="namex "> {{ request.user.bank_account_number }}</p> </span>
+  <p>Base Salary:  <span class="namex "> {{ payroll.base_salary }}</p> </span>
+  <p>Tax Deduction:  <span class="namex "> {{ payroll.tax_deduction }}</p> </span>
+  <p>Net Salary:  <span class="namex "> {{ payroll.net_salary }}</p> </span>
+{% endblock %}

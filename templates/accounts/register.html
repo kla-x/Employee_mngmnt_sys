@@ -1,0 +1,93 @@
+
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Registration Form </title>
+
+
+    <link rel="stylesheet" href="{% static 'css/register-form.css' %}"> 
+  </head>
+  <body>
+    <section class="container">
+      <header>Registration Form</header>
+      <form action="{% url 'register' %}"  method="post" class="form">
+        {% csrf_token %}
+
+
+        <div class="column">
+          <div class="input-box">
+            {{ form.first_name.label_tag }}
+            {{ form.first_name  }}
+        </div>
+          <div class="input-box">
+            {{ form.last_name.label_tag }}
+            {{ form.last_name }}
+             </div>
+      </div>
+
+
+      <div class="input-box">
+        {{ form.email.label_tag }}
+            {{ form.email }}
+      </div>
+      <div class="column">
+        <div class="input-box" >
+          {{ form.username.label_tag }} 
+                {{ form.username }}
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="input-box">
+          {{ form.password1.label_tag }}
+                {{ form.password1 }}
+        </div>
+        <div class="input-box">
+          {{ form.password2.label_tag }}
+          {{ form.password2 }}
+        </div>
+
+
+      </div>
+        <div class="column">
+          <div class="input-box">
+            {{ form.phone_number.label_tag }}
+                {{ form.phone_number }}
+          </div>
+          
+          <div class="input-box">
+            {{ form.bank_account_number.label_tag }}
+            {{ form.bank_account_number }}
+          </div>  
+        </div>
+
+        <div class="column">
+          <div class="select-box">
+            {{ form.department.label_tag }}
+                {{ form.department }}
+          </div>
+          <div class="select-box">
+            {{ form.role.label_tag }}
+            {{ form.role }}
+          </div>
+          </div>
+  
+        <button  type="submit" style="border-radius: 10px;">Submit</button>
+
+
+        <div class="column" >
+          <span > already have an account? </span>
+          <a href="{% url 'login' %}" class="text" >Login</a>
+          <div>
+          
+        
+      </form>
+    </section>
+  </body>
+</html>

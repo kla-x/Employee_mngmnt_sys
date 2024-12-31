@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <h2>Profile</h2>
+
+  <h3>User Details</h3>
+  <p>Username:<span class="namex "> {{ request.user.username }}</p>   </span>
+  <p>FirstName: <span class="namex "> {{ request.user.first_name }}</p>   </span>
+  <p>LastName: <span class="namex "> {{ request.user.last_name }}</p>   </span>
+  <p>Email: <span class="namex "> {{ request.user.email }}</p>   </span>
+  <p>Department: <span class="namex "> {{ request.user.department }}</p>   </span>
+  <p>Role: <span class="namex "> {{ request.user.role }}</p>   </span>
+  <p>Phone Number: <span class="namex "> {{ request.user.phone_number }}</p>   </span>
+ <span><p>Profile pic:   </p> {% if user.is_authenticated and user.profile_picture %}
+    <img style="height: 30px; width: 30px; border-radius: 40px;" src="{{ user.profile_picture.url }}" alt="{{ user.username }}'s Profile Picture" class="profile">
+{% else %}
+    <img src="{% static 'images/default.png' %}" alt="Default Profile Picture" class="profile">
+{% endif %}</span
+
+<br><br>
+<h2> Update Profile</h2>
+<form method="post" class="form" enctype="multipart/form-data">
+
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Update</button>
+</form>
+
+
+{% endblock %}

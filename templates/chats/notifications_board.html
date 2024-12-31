@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load chat_tags %}
+
+{% block content %}
+  <h1>Notifications Board</h1>
+  <div>
+    {% for notification in notifications %}
+      <div>
+        <img src="{% profile_picture notification.sender %}" alt="{{ notification.sender.username }}" width="50" height="50">
+        <strong>{{ notification.sender.username }}</strong>
+        <small>({% user_role notification.sender %})</small>
+        <small>{{ notification.timestamp }}</small>
+        <p style="color: rgb(231, 92, 92)">{{ notification.content }}</p>
+      </div>
+    {% endfor %}
+  </div>
+  {% if request.user.is_dep_lead or request.user.is_superuser %}
+
+  <br><br>
+  <form method="post" class="form form-row" style="max-width: 300px;" >
+      {% csrf_token %}
+      <input type="text" name="content" placeholder="Type your notification...">
+      <button type="submit">Send</button>
+    </form>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,218 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+
+    <title>Side Navigation Bar</title>
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'css/style-dash2.css' %}"> 
+    {% comment %} <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">   {% endcomment %}
+  </head>
+  <body>
+ 
+
+    <nav class="navbar">
+      <div class="logo_item">
+        <i class="bx bx-menu" id="sidebarOpen"></i>
+        <img src="{% static 'images/logo.png' %}" alt="Logo"></i>Workforce Hub
+      </div>
+
+  
+        
+  
+
+      <div class="navbar_content">
+        <span class="profession-mod">{% if user.is_authenticated %} {{ user.username }} {% else %} Welcome {% endif%} </span>
+        <span class="profession-mod"> {% if user.is_authenticated %}  {% if user.is_dep_lead %}   Deparment_Head : {% else %}  Deparment : {% endif %} ({{ user.department }}) {% else %} Dax management {% endif %} </span>
+        <i class="bi bi-grid"></i>
+        <i class='bx bx-sun' id="darkLight"></i> 
+        <i class='bx bx-bell' ></i>
+        {% if user.is_authenticated and user.profile_picture %}
+    <img src="{{ user.profile_picture.url }}" alt="{{ user.username }}'s Profile Picture" class="profile">
+{% else %}
+    <img src="{% static 'images/default.png' %}" alt="Default Profile Picture" class="profile">
+{% endif %}
+      </div>
+    </nav>
+
+    <!-- sidebar -->
+    <nav class="sidebar">
+      <div class="menu_content">
+        <ul class="menu_items">
+          <div class="menu_title menu_dahsboard"></div>
+   
+          {% if user.is_approved %}
+          <li class="item">
+            <a href="{% url 'dashboard' %}" class="nav_link">
+              <span class="navlink_icon">
+                <i class='bx bx-home-alt icon' ></i>
+              </span>
+              <span class="navlink">Home</span>
+            </a>
+            <a href="{% url 'attendance' %}" class="nav_link">
+                <span class="navlink_icon">
+                    <i class='bx bx-note icon'></i>
+                </span>
+                <span class="navlink">Attendance</span>
+              </a>
+              <a href="{% url 'leave' %}" class="nav_link">
+                <span class="navlink_icon">
+                    <i class='bx bx-log-out-circle icon'></i>
+                </span>
+                <span class="navlink">Leave</span>
+              </a>
+
+
+          </li>
+ 
+        </ul>
+
+        <ul class="menu_items">
+          <div class="menu_title menu_personal"></div>
+ 
+          
+          <li class="item">
+            <div href="#" class="nav_link submenu_item">
+              <span class="navlink_icon">
+                <i class='bx bx-user icon' ></i>
+              </span>
+              <span class="navlink">Profile</span>
+              <i class="bx bx-chevron-right arrow-left"></i>
+            </div>
+            
+
+            <ul class="menu_items submenu">
+              <a href="{% url 'profile' %}" class="nav_link sublink"> Details</a>
+              <a href="{% url 'logout' %}" class="nav_link sublink">Logout</a>
+            </ul>
+          </li>
+   
+
+          <li class="item">
+            <a href="{% url 'payroll' %}" class="nav_link">
+              <span class="navlink_icon">
+                <i class='bx bx-dollar icon' ></i>
+              </span>
+              <span class="navlink">Payroll</span>
+            </a>
+          </li>
+          
+          
+        <ul class="menu_items">
+          <div class="menu_title menu_chats"></div>
+          <li class="item">
+
+            <a href="{% url 'notifications_board' %}" class="nav_link">
+              <span class="navlink_icon">
+                <i class="bx bx-flag"></i>
+              </span>
+              <span class="navlink">Notice board</span>
+            </a>
+          </li>
+          <li class="item">
+
+            <a href="{% url 'community_chat' %}" class="nav_link">
+              <span class="navlink_icon">
+                <i class="bx bx-flag"></i>
+              </span>
+              <span class="navlink">Community chat</span>
+            </a>
+          </li>
+
+          <li class="item">
+            <a href="{% url 'department_chat' %}" class="nav_link">
+              <span class="navlink_icon">
+                <i class="bx bx-medal"></i>
+              </span>
+              <span class="navlink">Department chat</span>
+            </a>
+          </li>
+          
+        </ul>
+
+         {% if user.is_dep_lead %} 
+
+            <ul class="menu_items">
+              <div class="menu_title menu_admin"></div>
+              <li class="item">
+                <a href="{% url 'reports' %}" class="nav_link">
+                  <span class="navlink_icon">
+                    <i class="bx bx-flag"></i>
+                  </span>
+                  <span class="navlink">Reports</span>
+                </a>
+              </li>
+              <li class="item">
+                <a href="{% url 'notifications_board' %}" class="nav_link">
+                  <span class="navlink_icon">
+                    <i class="bx bx-medal"></i>
+                  </span>
+                  <span class="navlink">Make Anouncements </span>
+                </a>
+              </li>
+              <li class="item">
+                  <a href="#" class="nav_link">
+                    <span class="navlink_icon">
+                      <i class="bx bx-flag"></i>
+                    </span>
+                    <span class="navlink">Approve members</span>
+                  </a>
+                </li>
+            </ul>
+          </ul>
+        {% endif %}
+
+
+        {% else %}
+
+        
+          <li class="item">
+            <div href="#" class="nav_link submenu_item">
+              <span class="navlink_icon">
+                <i class='bx bx-user icon' ></i>
+              </span>
+              <span class="navlink">Profile</span>
+              <i class="bx bx-chevron-right arrow-left"></i>
+            </div>
+            
+
+            <ul class="menu_items submenu">
+              <a href="{% url 'logout' %}" class="nav_link sublink">Logout</a>
+            </ul>
+          </li>
+       
+
+       {% endif %}
+
+
+          
+        <!-- Sidebar Open / Close -->
+        <div class="bottom_content">
+          <div class="bottom expand_sidebar">
+            <span> Expand</span>
+            <i class='bx bx-log-in' ></i>
+          </div>
+          <div class="bottom collapse_sidebar">
+            <span> Collapse</span>
+            <i class='bx bx-log-out'></i>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    
+    <section class="home">
+         
+        {% block content %}
+        {% endblock %}
+      
+             
+                  </section>
+    <!-- JavaScript -->
+    <script src="{% static 'js/script-dash2.js' %}">  </script> 
+  </body>
+</html>

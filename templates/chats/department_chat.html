@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load chat_tags %}
+
+{% block content %}
+  <h1>Department Chat</h1>
+  <div>
+    {% for message in messages %}
+      <div>
+        <img  src="{% profile_picture message.sender %}" alt="{{ message.sender.username }}" width="50" height="50" >
+        <strong>{{ message.sender.username }}</strong>
+        <small>({% user_role message.sender %})</small>
+
+        <!-- <span style="color: rgb(62, 255, 72);">{{ message.content }}</span><br> -->
+        <span style="color: rgb(255, 84, 246);">{{ message.content }}</span><br>
+        <small>{{ message.timestamp }}</small>
+      </div>
+    {% endfor %}
+  </div>
+  <br><br>
+  <form method="post" class="form form-row" style="max-width: 300px;" >
+    {% csrf_token %}
+    <input type="text" name="content" placeholder="Type your message...">
+    <button type="submit">Send</button>
+  </form>
+{% endblock %}
